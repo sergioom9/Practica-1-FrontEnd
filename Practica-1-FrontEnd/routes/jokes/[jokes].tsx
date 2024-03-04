@@ -4,7 +4,8 @@ import { Joke } from "../../types.ts";
 
 export const handler: Handlers = {
   GET: async (_req: Request, ctx: FreshContext<unknown, Joke[]>) => {
-    const { jokes } = ctx.params;
+    let { jokes } = ctx.params;
+    if (jokes>10 || jokes<1){ jokes=10;}
     const API_KEY = "nyUaq934E+v/f8wd3lGEdQ==Zxh8OOK7GzEP9WAb";
     if (!API_KEY) {
       return new Response("Error - NINJA API KEY NOT FOUND", { status: 500 });
